@@ -110,7 +110,36 @@
     }
   </style>
 </head>
-<body>
+<script>
+    document.oncontextmenu = function () { return false; }
+	document.onkeypress = function (event) {
+	event = (event || window.event);
+	   if (event.keyCode == 123) {
+	   return false;
+	}
+	}
+	document.onmousedown = function (event) {
+	event = (event || window.event);
+	   if (event.keyCode == 123) {
+	   return false;
+	}
+	}
+	document.onkeydown = function (event) {
+	event = (event || window.event);
+	   if (event.keyCode == 123) {
+	   return false;
+	}
+	}
+	document.addEventListener("keydown", function (event){
+	   if (event.ctrlKey){
+	 	  event.preventDefault();
+		 }
+	   if(event.keyCode == 123){
+		  event.preventDefault();
+		 }
+	})
+</script>
+<body onmousedown="return false" onselectstart="return false">
   <div class="container">
     <a class="button-bottom-right" onclick="history.back()"><b>Go back</b></a>
    <!--
