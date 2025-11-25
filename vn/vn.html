@@ -56,13 +56,33 @@
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
       color: #555;
+	  
+	
+
+    }
+	#accountNumber {
+        cursor: pointer; 
+        font-weight: bold; 
+        color: #333; /* Màu chữ */
+        
+        /* HIỆU ỨNG HIGHLIGHT LUÔN LUÔN HIỂN THỊ */
+        background-color: #d3d6d8; /* Màu nền highlight (ví dụ: Vàng nhạt) */
+        
+        /* Để highlight chỉ bao quanh chữ */
+        display: inline-block; 
+        
+        /* Thêm padding và bo tròn góc */
+        padding: 2px 5px; 
+        border-radius: 4px; 
+		margin: 0;
+		margin-bottom: 0.7rem;
     }
     img.qr {
       width: 260px;
       max-width: 100%;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
     }
     .footer {
       margin-top: 2rem;
@@ -88,6 +108,8 @@
   cursor: pointer;
   font-size: 25px;
   font-family: "Inter", Monospace;
+  margin: 0;
+  
 } 
 
 /* Darker background on mouse-over */
@@ -158,6 +180,48 @@
   </style>
 </head>
 <script>
+
+    function copyText(textToCopy) {
+        // Sử dụng API Clipboard hiện đại (hỗ trợ tốt nhất)
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                // Tùy chọn: Hiển thị thông báo đã sao chép thành công
+                alert("Đã sao chép số tài khoản: " + textToCopy);
+            }, function(err) {
+                console.error('Không thể sao chép: ', err);
+                // Thử phương pháp sao chép cũ hơn nếu thất bại
+                fallbackCopyText(textToCopy);
+            });
+        } else {
+            // Thử phương pháp sao chép cũ hơn nếu trình duyệt không hỗ trợ Clipboard API
+            fallbackCopyText(textToCopy);
+        }
+    }
+    
+    function fallbackCopyText(textToCopy) {
+        // Phương pháp cũ: Dùng <textarea> tạm thời
+        var textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        
+        // Đặt textarea ra ngoài màn hình để người dùng không nhìn thấy
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            // Tùy chọn: Hiển thị thông báo đã sao chép thành công
+            alert("Đã sao chép số tài khoản: " + textToCopy);
+        } catch (err) {
+            console.error('Không thể sao chép: ', err);
+        }
+        
+        document.body.removeChild(textArea);
+    }
+	
     document.oncontextmenu = function () { return false; }
 
  
@@ -189,9 +253,10 @@
     <h1><b>Aoxloty</b></h1>
     <p>Nếu bạn muốn giúp tui và đang ở Việt Nam, thì đây chính là cách!</p>
     <img src="./qr-momo.png" alt="Vietinbank QR code" class="qr" id="qrCodeImage"/ >
-	 <p>108881886905</p>
-	 <div style="height: 0.01rem;"></div>
-	<button class="button2" onclick="downloadQR()"><i class="fa fa-cloud-download"></i> <b>Tải về</b></button></br>
+	<div style="height: 0.01rem;"></div>
+	 <p id="accountNumber" onclick="copyText('108881886905')">108881886905</p>
+	 <div style="height: 0.001rem;"></div>
+	<button class="button2" onclick="downloadQR()"><i class="fa fa-cloud-download"></i> <b>Tải về</b></button>
 	
 	<div style="height: 1rem;"></div>
     <p>Quét mã bằng app ngân hàng hoặc app thanh toán của bạn.</p>
