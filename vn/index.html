@@ -197,7 +197,47 @@
     .text-cre:active {
 	  text-decoration: none;
 	  }
-	
+	.button-bottom-right {
+	  position: absolute;
+      bottom: -50px;
+	  right: 20px;
+	  border: none;
+  	  padding: 12px 8px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  cursor: pointer;
+	  .button-left {
+	    right: auto; 
+	    left: 2.5rem;
+	   }
+	  width: 60px;
+      height: 45px;
+      border: 1px;
+      border-radius: 5px;
+	  font-size: 17px;
+	}
+	.button-bottom-right:hover {
+	   background-color: red;
+       color: yellow;
+	}
+	.button-bottom-right:before {
+	   font-family: fontAwesome;
+       content: "\f0da\00a0";
+	}
+	.button-bottom-right:link {
+      color: white;
+	}
+    .button-bottom-right:visited {
+      color: white;
+	}
+    .button-bottom-right:hover {
+	  color: white;
+	}
+    .button-bottom-right:active {
+      color: white;
+	}
     @media (max-width: 480px) {
       body {
         padding: 2rem;
@@ -293,6 +333,7 @@
 
   <div class="container">
     <a class="button button1" href="/" ><b></b></a>
+	<a class="button-bottom-right" href="../earlytest/test.html" ><b>Test</b></a>
 	<a class="button1 button-left" href="https://guns.lol/aoxloty" ><b>Home</b></a>
     <div style="height: 3rem;"></div>
     <div class="badge">Only in Vietnam!</div>
@@ -311,7 +352,7 @@
       ©2025 Aoxloty.<br/>
       Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank" class="text-cre">congtuuit</a>.
     </div>
-	<p class="text-bottom-left" ><a href="https://github.com/aoxloty/aoxloty.github.io/releases" target="blank" class="text-rls">v205.1202d</a></p>
+	<p class="text-bottom-left" ><a href="https://github.com/aoxloty/aoxloty.github.io/releases" target="blank" class="text-rls">v205.1202f</a></p>
   </div>
 </body>
 </html>
