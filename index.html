@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <link href="favicon.ico" rel="icon" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Support me</title>
+  <title>Choose your language</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
   <style>
     * {
@@ -17,8 +14,7 @@
     }
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
-	  background-image:url('artfightlol.png');
+      background-color: gray;
 	  background-repeat: no-repeat;
 	  background-position: center;
 	  background-attachment: fixed;
@@ -29,81 +25,81 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+	  position: relative; 
+      overflow: hidden;
+    }
+	
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		background-image: url('en/artfightlol.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-attachment: fixed;
+		background-size: cover;
+		filter: blur(10px);
+		transform: scale(1.05); 
     }
     .container {
-	  position: relative;
       background: #fff;
       padding: 2.5rem;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 50);
+      box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.5),
+        0 15px 35px rgba(0, 0, 0, 0.7);
       max-width: 500px;
       width: 100%;
       text-align: center;
       animation: fadeIn 0.5s ease-in-out;
+	  position: relative;
+	  padding-bottom: 4.5rem;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
     h1 {
-      color: #1c5ee3;
+      color: #e67e22;
       font-size: 2.2rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
     p {
       font-size: 1.1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.8rem;
       color: #555;
     }
     img.qr {
       width: 260px;
       max-width: 100%;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 10);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
       margin-bottom: 1.5rem;
-    }
-	.axolotl-wrapper {
-      display: flex;
-      justify-content: center; 
-      margin-top: 1rem; 
-      margin-bottom: 1.5rem;
-    }
-	.axolotl-img {
-      display: block; 
-   	  image-rendering: pixelated;
     }
     .footer {
-      margin-top: 1rem;
+      margin-top: 2rem;
       font-size: 0.9rem;
       color: #999;
     }
-	.wplace-link:link {
-      color: white;
-	}
-    .wplace-link:visited {
-      color: white;
-	}
-    .wplace-link:hover {
-	  color: white;
-	}
-    .wplace-link:active {
-      color: white;
-	}
     .badge {
       display: inline-block;
-      background: #1c5ee3;
+      background: #e67e22;
       color: white;
-      font-size: 1rem;
+      font-size: 0.9rem;
       padding: 6px 14px;
       border-radius: 30px;
-	  margin-top:0.1rem;
+      margin-bottom: 1rem;
     }
 	.button-bottom-right {
 	  position: absolute;
-      bottom: -50px;
-	  right: 20px;
+      bottom: 2.5rem;
+	  right: 2.5rem;
 	  border: none;
-  	  padding: 12px 8px;
+  	  padding: 15px 8px;
 	  text-align: center;
 	  text-decoration: none;
 	  display: inline-block;
@@ -113,11 +109,11 @@
 	    right: auto; 
 	    left: 2.5rem;
 	   }
-	  width: 60px;
-      height: 45px;
-      border: 1px;
-      border-radius: 5px;
-	  font-size: 17px;
+	   width: 60px;
+       height: 50px;
+       border: 1px;
+       border-radius: 5px;
+	   font-size: 17px;
 	}
 	.button-bottom-right:hover {
 	   background-color: red;
@@ -125,125 +121,78 @@
 	}
 	.button-bottom-right:before {
 	   font-family: fontAwesome;
-       content: "\f0da\00a0";
+       content: "\f0da\00a0"; }
+	.language-buttons {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 2rem; 
 	}
-	.button-bottom-right:link {
-      color: white;
+	.lang-img {
+    width: 250px; 
+    height: auto;
+    max-width: 100%; 
+    cursor: pointer; 
+	transition: transform 0.2s ease-in-out;
+	z-index: 1;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	margin-top: 0.7rem;
 	}
-    .button-bottom-right:visited {
-      color: white;
-	}
-    .button-bottom-right:hover {
-	  color: white;
-	}
-    .button-bottom-right:active {
-      color: white;
-	}
-	.button {
-      position: absolute;
-      top: 2.5rem;
-      right: 2.5rem;
-      border: none;
-      padding: 15px 10px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      cursor: pointer;
+	.lang-img:hover {
+    transform: scale(1.1);
+    z-index: 10;
+	border-color: #e67e22; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     }
-    .button1 {width: 70px; height: 50px; border: 1px; border-radius: 5px;}
-    .button1:hover {
-      background-color: red;
-      color: yellow;
+    .button-center-bottom {
+    position: absolute;
+    bottom: 2.5rem; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 80px;
+    height: 50px; 
+    border: 1px; 
+    border-radius: 5px;
+    padding: 15px 4.5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    cursor: pointer;
     }
-    .button1:before {
-      font-family: fontAwesome;
-      content: "\f0ac\00a0";
+	.button-center-bottom:hover {
+		background-color: Purple;
+		color: white;
     }
-    .button1.button-left:before {
-      content: "\f015\00a0"; 
-    }
-    .button1.button-left:hover {
-	  background-color: Purple;
-      color: white;
-	}
-	.button-left {
-	  position: absolute;
-      top: 2.5rem;
-      left: 2.5rem;
-      border: none;
-      padding: 15px 4.5px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 17px;
-      cursor: pointer;
-      width: 100px;
-	}
-	.text-bottom-left {
-      position: absolute;
-      bottom: -60px;
-      left: 20px;
-      font-size: 16px; 
-      color: #333; 
-      padding: 0 5px; 
-      white-space: nowrap;
-      background-color: #fff; 
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    }
-	.text-rls:link {
-      color: #333;
-	  text-decoration: none;
-	}
-    .text-rls:visited {
-      color: #333;
-	  text-decoration: none;
-	}
-    .text-rls:hover {
-	  color: #333;
-	  text-decoration: none;
-	}
-    .text-rls:active {
-      color: #333;
-	  text-decoration: none;
-	}
-	.text-cre:link {
-	  text-decoration: none;
-	}
-    .text-cre:visited {
-	  text-decoration: none;
-	}
-    .text-cre:hover {
-	  text-decoration: none;
-	}
-    .text-cre:active {
-	  text-decoration: none;
+	.button-center-bottom:before {
+		font-family: fontAwesome;
+		content: "\f015\00a0"; 
 	}
     @media (max-width: 480px) {
       body {
-        padding: 2rem;
+        padding: 1rem;
       }
       .container {
-        padding: 2rem;
+        padding: 4rem;
       }
-	  .button1 {
-	    top: 1.5rem;
-		right: 1.5rem;
-	  }
-	  .button-left {
-        left: 1.5rem;
-		width: 80px;
-	  }
 	  .button-bottom-right {
-	    bottom: -50px;
-        right: 20px;
+	    bottom: 1.5rem;
+        right: 1.5rem;
 	  }
-	  .text-bottom-left {
-	    bottom: -50px;
-        left: -27px;
-	  }
+	  .language-buttons {
+        gap: 5px;
+	  }
+    
+      .lang-img {
+        width: 180px;
+      }
+	  .lang-img:hover {
+        transform: scale(1.15);
+      }
     }
+	
   </style>
 </head>
 <script>
@@ -273,30 +222,43 @@
 	   if(event.keyCode == 123){
 		  event.preventDefault();
 		 }
-	})  
-</script> 
+	})
+	const LAST_VISIT_KEY = 'aoxloty_language_set';
+    const DEFAULT_URL = '/en/'; /
+	const isLanguageSet = localStorage.getItem(LAST_VISIT_KEY);
+	if (isLanguageSet) {
+        window.location.replace(DEFAULT_URL);
+    }
+	function setLanguagePreference(langUrl) {
+	    localStorage.setItem(LAST_VISIT_KEY, langUrl);
+        window.location.href = langUrl;
+    }
+</script>
 <body onmousedown="return false" onselectstart="return false">
-
   <div class="container">
-    <a class="button button1" href="vn/" ><b>VN</b></a>
-	<a class="button1 button-left" href="https://guns.lol/aoxloty" ><b>Home</b></a>
-	<a class="button-bottom-right" href="earlytest/test.html" ><b>Test</b></a>
-	<div style="height: 3rem;"></div>
-	<h1><b>Aoxloty</b></h1>
-	<p>For international payment!</p>
-    <a target="blank" href="https://www.buymeacoffee.com/aoxloty"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=aoxloty&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
-	<div style="height: 0rem;"></div>
-	<div class="axolotl-wrapper">
-	<img class="axolotl-img" src="vn/fun.png" alt="Yellow Axolotl F">
+    <p>Choose your language</p>
+	<p>Chọn ngôn ngữ của bạn</p>
+    <div class="language-buttons">
+        <a href="javascript:void(0)" onclick="setLanguagePreference('/en')">
+            <img src="eng.png" alt="English Language" class="lang-img">
+        </a>
+        <a href="javascript:void(0)" onclick="setLanguagePreference('/vn')">
+            <img src="vn.png" alt="Vietnamese Language" class="lang-img">
+        </a>
     </div>
-	<div class="badge">Had been on <a href="https://wplace.samuelscheit.com/#z=15.00&lat=21.11746&lng=105.79732&time=2025-08-09T20-01-14.231Z&zoom=15.00" target="blank" class="wplace-link"><b>WPlace</b></a>!</div>
+    <a class="button-center-bottom" href="https://guns.lol/aoxloty"><b>Home</b></a>
+   <!--
+    <div class="badge">Ủng hộ nhỏ - Yêu thương to</div>
+    <h1>Ủng hộ tác giả 💛</h1>
+    <p>Nếu bạn thấy nội dung hữu ích, hãy mua cho mình một ly cà phê nhé!</p>
+    <img src="./qr-momo.png" alt="Mã QR Momo hoặc VietQR" class="qr" />
+    <p>Quét mã bằng Momo hoặc app ngân hàng để ủng hộ trực tiếp.</p>
     <div class="footer">
-      Thank you so much💛<br/>
-      ©2025 Aoxloty.<br/>
-      Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank" class="text-cre">congtuuit</a>.
+      Xin chân thành cảm ơn sự ủng hộ của bạn!<br/>
+      © 2025 Bản quyền thuộc về bạn
     </div>
-	<p class="text-bottom-left" ><a href="https://github.com/aoxloty/aoxloty.github.io/releases" target="blank" class="text-rls">v205.1125</a></p>
+   -->
   </div>
-
+  
 </body>
 </html>
