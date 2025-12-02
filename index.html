@@ -223,26 +223,17 @@
 		  event.preventDefault();
 		 }
 	})
-	const LAST_VISIT_KEY = 'aoxloty_language_set';
-    const DEFAULT_URL = '/en/'; /
-	const isLanguageSet = localStorage.getItem(LAST_VISIT_KEY);
-	if (isLanguageSet) {
-        window.location.replace(DEFAULT_URL);
-    }
-	function setLanguagePreference(langUrl) {
-	    localStorage.setItem(LAST_VISIT_KEY, langUrl);
-        window.location.href = langUrl;
-    }
+	
 </script>
 <body onmousedown="return false" onselectstart="return false">
   <div class="container">
     <p>Choose your language</p>
 	<p>Chọn ngôn ngữ của bạn</p>
     <div class="language-buttons">
-        <a href="javascript:void(0)" onclick="setLanguagePreference('/en')">
+        <a href="/en/">
             <img src="eng.png" alt="English Language" class="lang-img">
         </a>
-        <a href="javascript:void(0)" onclick="setLanguagePreference('/vn')">
+        <a href="/vn/">
             <img src="vn.png" alt="Vietnamese Language" class="lang-img">
         </a>
     </div>
