@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: aoxloty/aoxloty
+  name: git-gateway
   branch: main
-  client_id: "Ov23liJ5XpampDAnIyQq"
 
 media_folder: "assets/art"
 public_folder: "assets/art"
