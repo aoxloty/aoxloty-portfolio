@@ -2,8 +2,8 @@ backend:
   name: github
   repo: aoxloty/aoxloty.github.io
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  base_url: https://oauth.decapcms.org
+  auth_endpoint: /auth
 
 media_folder: "assets/art"
 public_folder: "assets/art"
