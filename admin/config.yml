@@ -2,7 +2,6 @@ backend:
   name: github
   repo: aoxloty/aoxloty
   branch: main
-  auth_scope: repo
   client_id: "Ov23liJ5XpampDAnIyQq"
 
 media_folder: "assets/art"
