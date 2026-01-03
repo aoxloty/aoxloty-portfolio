@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: aoxloty/aoxloty.github.io # Thay bằng tên thật của bạn
   branch: main
+  base_url: aoxloty-github-io.vercel.app # Sau khi deploy xong Vercel sẽ cho bạn link này
+  auth_endpoint: api/auth
 
 media_folder: "assets/art"
 public_folder: "assets/art"
