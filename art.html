@@ -56,45 +56,40 @@
 
     <script>
     async function loadArtDetail() {
+    const titleH1 = document.getElementById('art-title');
+    const imageImg = document.getElementById('art-image');
+    const descP = document.getElementById('art-desc');
+    const dateP = document.getElementById('art-date');
+    const linkA = document.getElementById('art-link');
+
     try {
-        // 1. Lấy ID từ URL
         const urlParams = new URLSearchParams(window.location.search);
         const artId = urlParams.get('id');
 
-        // 2. Fetch dữ liệu từ data.json
         const response = await fetch('data.json');
         const data = await response.json();
-        const art = data.artData[artId];
+        
+        // Tìm đúng tranh có ID khớp với URL
+        const art = data.artData.find(item => item.id === artId);
 
         if (art) {
-            // 3. Đổ dữ liệu vào từng thẻ riêng biệt
-            document.title = `${art.title} | Aoxloty Portfolio`;
-            document.getElementById('art-title').innerText = art.title;
-            document.getElementById('art-date').innerText = art.date || '';
-            document.getElementById('art-desc').innerText = art.description || 'No description available.';
-            
-            const imgElement = document.getElementById('art-image');
-            imgElement.src = art.image;
-            imgElement.alt = art.title;
-
-            // Xử lý nút Link Toyhouse
-            const linkBtn = document.getElementById('art-link');
-            if (art.link) {
-                linkBtn.href = art.link;
-                linkBtn.style.display = 'inline-block';
-            } else {
-                linkBtn.style.display = 'none';
+            document.title = `${art.title} | Aoxloty`;
+            if (titleH1) titleH1.innerText = art.title;
+            if (imageImg) imageImg.src = art.image;
+            if (descP) descP.innerText = art.description || '';
+            if (dateP) dateP.innerText = art.date || '';
+            if (linkA && art.link) {
+                linkA.href = art.link;
+                linkA.style.display = 'inline-block';
             }
         } else {
-            document.getElementById('art-title').innerText = "Lỗi: Không tìm thấy tranh";
-            document.getElementById('art-title').style.color = "red";
+            if (titleH1) titleH1.innerText = "Không tìm thấy tác phẩm";
         }
     } catch (error) {
-        console.error("Lỗi nạp chi tiết tranh:", error);
-        document.getElementById('art-title').innerText = "Đã có lỗi xảy ra!";
+        console.error(error);
+        if (titleH1) titleH1.innerText = "Lỗi nạp dữ liệu";
     }
 }
-
 loadArtDetail();
     </script>
 </body>

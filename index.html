@@ -159,29 +159,27 @@
         const response = await fetch('data.json');
         const data = await response.json();
 
-        galleryContainer.innerHTML = ''; // Xóa chữ "Loading"
+        // Xóa nội dung cũ để nạp mới
+        if (galleryContainer) galleryContainer.innerHTML = '';
 
-        // Kiểm tra dữ liệu artData dạng Array
+        // Kiểm tra dữ liệu artData dạng Danh sách (Array)
         if (data.artData && Array.isArray(data.artData)) {
-            // Lấy 6-8 tranh mới nhất để hiện ở trang chủ
-            const latestArts = data.artData.slice(-8).reverse(); 
+            // Lấy 8 tranh mới nhất, đảo ngược để cái mới nhất lên đầu
+            const latestArts = [...data.artData].reverse().slice(0, 8); 
 
             latestArts.forEach(art => {
                 const artItem = document.createElement('div');
                 artItem.className = 'art-item';
                 artItem.innerHTML = `
                     <a href="art.html?id=${art.id}">
-                        <img src="${art.image}" alt="${art.title}" loading="lazy">
+                        <img src="${art.image}" alt="${art.title}" style="width:100%; border-radius:10px;">
                     </a>
                 `;
                 galleryContainer.appendChild(artItem);
             });
-        } else {
-            galleryContainer.innerHTML = '<p style="grid-column: 1/-1;">Chưa có tranh nào được đăng.</p>';
         }
     } catch (error) {
         console.error("Lỗi tải trang chủ:", error);
-        galleryContainer.innerHTML = '<p>Không thể kết nối dữ liệu.</p>';
     }
 }
 loadHomeGallery();
