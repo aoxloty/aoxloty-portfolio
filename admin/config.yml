@@ -2,8 +2,7 @@ backend:
   name: github
   repo: aoxloty/aoxloty.github.io
   branch: main
-  auth_type: implicit
-  app_id: Ov23liJ5XpampDAnIyQq
+  auth_scope: repo
 
 media_folder: "assets/art"
 public_folder: "assets/art"
