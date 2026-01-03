@@ -171,7 +171,7 @@
             galleryContainer.innerHTML = ''; 
             if (data.artData && Array.isArray(data.artData)) {
                 // Lấy tối đa 8 tranh mới nhất
-                const latestArts = [...data.artData].reverse().slice(0, 8); 
+                const latestArts = [...data.artData].reverse().slice(0, 3); 
 
                 latestArts.forEach(art => {
                     const artItem = document.createElement('div');
