@@ -19,8 +19,10 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
-      background-image: url('artfightlol.png');
+      background: url('artfightlol.png') no-repeat center center fixed;
+      background-size: cover;
+      /* Nếu muốn có cả lớp phủ màu phía trên ảnh */
+      background-image: linear-gradient(to right, rgba(253, 251, 251, 0.8), rgba(235, 237, 238, 0.8)), url('artfightlol.png');
       transition: background 0.3s ease, color 0.3s ease;
       background-repeat: no-repeat;
       background-position: center;
@@ -557,8 +559,16 @@
 
     /* Các thành phần khác khi ở Dark Mode */
     body.dark-mode {
-      background: #121212;
-      color: #e0e0e0;
+      background-color: #121212 !important;
+
+      /* Khai báo đầy đủ: ảnh nền + không lặp + căn giữa + cố định */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('artfightlol.png') !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-attachment: fixed !important;
+      background-size: cover !important;
+
+      color: #e0e0e0 !important;
     }
 
     body.dark-mode .container {
@@ -658,6 +668,7 @@
       h3,
       .art-gallery {
         width: 100%;
+      
         /* Ép các thành phần này rộng hết cỡ, không bị bóp thành đường kẻ */
       }
 
@@ -699,7 +710,7 @@
 
       .dark-mode-toggle:hover {
         transform: translateY(-5px);
-        /* Các hiệu ứng hover khác của bạn ở đây */
+        /* Các hiệu ứng hover khác ở đây */
       }
 
       .dark-mode-toggle:active {
