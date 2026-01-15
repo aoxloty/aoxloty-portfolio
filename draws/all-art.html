@@ -132,8 +132,9 @@
       overflow: hidden;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      background: #f9f9f9;
+      background: #f0f0f0;
       transition: all 0.3s ease;
+      min-height: 250px;
     }
 
     .art-item img {
@@ -142,6 +143,28 @@
       object-fit: cover;
       display: block;
       transition: 0.4s;
+      opacity: 0;
+    }
+
+    .art-item:not(:has(img.loaded)) {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        background-color: #f0f0f0;
+      }
+
+      50% {
+        background-color: #e0e0e0;
+      }
+    }
+
+
+    .art-item img.loaded {
+      opacity: 1;
     }
 
     .art-item:hover {
@@ -150,6 +173,26 @@
 
     .art-item:hover img {
       transform: scale(1.08);
+    }
+
+    body.dark-mode .art-item {
+      background: #2a2a2a;
+    }
+
+    body.dark-mode .art-item:not(:has(img.loaded)) {
+      animation: pulse-dark 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dark {
+
+      0%,
+      100% {
+        background-color: #2a2a2a;
+      }
+
+      50% {
+        background-color: #333;
+      }
     }
 
     .footer {
@@ -421,11 +464,21 @@
             const imagePath = art.image.startsWith('http') ? art.image : `../${art.image}`;
 
             const img = new Image();
-            img.loading = 'lazy'; 
+            img.loading = 'lazy';
             img.src = imagePath;
             img.alt = art.title;
 
             img.onload = () => {
+              img.classList.add('loaded'); 
+              loadedImages++;
+              if (loadedImages >= totalImages * 0.7 && loadingScreen) {
+                loadingScreen.classList.add('hidden');
+              }
+            };
+
+            img.onerror = () => {
+              img.classList.add('loaded'); 
+              img.alt = 'Image failed to load';
               loadedImages++;
               if (loadedImages >= totalImages * 0.7 && loadingScreen) {
                 loadingScreen.classList.add('hidden');
@@ -439,7 +492,10 @@
 
           setTimeout(() => {
             if (loadingScreen) loadingScreen.classList.add('hidden');
-          }, 3000);
+            document.querySelectorAll('.art-item img:not(.loaded)').forEach(img => {
+              img.classList.add('loaded');
+            });
+          }, 5000);
 
           const scrollPos = sessionStorage.getItem('scrollPos');
           if (scrollPos && parseInt(scrollPos) > 0) {
@@ -457,7 +513,7 @@
           if (loadingScreen) loadingScreen.classList.add('hidden');
         }
       } catch (error) {
-        console.error("Error when loading Gallery:", error);
+        console.error("Error loading Gallery:", error);
         if (galleryContainer) galleryContainer.innerHTML = '<p>Error loading artworks.</p>';
         if (loadingScreen) loadingScreen.classList.add('hidden');
       }

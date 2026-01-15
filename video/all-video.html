@@ -128,18 +128,25 @@
         }
 
         .video-card {
-            background: #f9f9f9;
+            background: #f0f0f0;
             padding: 15px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             transition: background 0.3s ease, box-shadow 0.3s ease;
+            min-height: 280px;
         }
 
         .video-card iframe {
             width: 100%;
             height: 200px;
             border-radius: 10px;
+            opacity: 0;
             border: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .video-card iframe.loaded {
+            opacity: 1;
         }
 
         .video-card h3 {
@@ -148,9 +155,45 @@
             color: #333;
         }
 
+        .video-card:not(:has(iframe.loaded)) {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
         .video-card p {
             font-size: 0.9rem;
             color: #666;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                background-color: #f0f0f0;
+            }
+
+            50% {
+                background-color: #e0e0e0;
+            }
+        }
+
+        body.dark-mode .video-card {
+            background: #2a2a2a;
+        }
+
+        body.dark-mode .video-card:not(:has(iframe.loaded)) {
+            animation: pulse-dark 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dark {
+
+            0%,
+            100% {
+                background-color: #2a2a2a;
+            }
+
+            50% {
+                background-color: #333;
+            }
         }
 
 
@@ -432,7 +475,17 @@
                         container.appendChild(card);
 
                         const iframe = card.querySelector('iframe');
+
                         iframe.onload = () => {
+                            iframe.classList.add('loaded'); 
+                            loadedVideos++;
+                            if (loadedVideos >= totalVideos * 0.5 && loadingScreen) {
+                                loadingScreen.classList.add('hidden');
+                            }
+                        };
+
+                        iframe.onerror = () => {
+                            iframe.classList.add('loaded');
                             loadedVideos++;
                             if (loadedVideos >= totalVideos * 0.5 && loadingScreen) {
                                 loadingScreen.classList.add('hidden');
@@ -442,7 +495,10 @@
 
                     setTimeout(() => {
                         if (loadingScreen) loadingScreen.classList.add('hidden');
-                    }, 2000);
+                        document.querySelectorAll('.video-card iframe:not(.loaded)').forEach(iframe => {
+                            iframe.classList.add('loaded');
+                        });
+                    }, 3000);
 
                 } else {
                     container.innerHTML = "<p>No videos available.</p>";
