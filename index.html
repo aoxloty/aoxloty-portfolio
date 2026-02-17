@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     * {
@@ -818,6 +819,45 @@
       transition: all 0.3s ease;
     }
 
+    .show-notification-btn {
+      position: fixed;
+      bottom: 150px;
+      right: 30px;
+      z-index: 99;
+      width: 50px;
+      height: 50px;
+      border: none;
+      background-color: #fff;
+      color: #f0b232;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .show-notification-btn i {
+      font-size: 20px;
+    }
+
+    .show-notification-btn:hover {
+      transform: translateY(-5px);
+      background-color: #f0b232;
+      color: #fff;
+    }
+
+    body.dark-mode .show-notification-btn {
+      background-color: #333;
+      color: #f0b232;
+    }
+
+    body.dark-mode .show-notification-btn:hover {
+      background-color: #f0b232;
+      color: #fff;
+    }
+
     .dark-mode-toggle i {
       font-size: 20px;
 
@@ -867,6 +907,8 @@
     .dark-mode-toggle:hover {
       transform: translateY(-5px);
     }
+
+
 
     body.dark-mode .button-lang {
       background: #333;
@@ -1090,7 +1132,6 @@
       margin-top: 2px;
     }
 
-    /* Di chuyển TRƯỚC @media query */
     .view-counter {
       display: inline-flex;
       align-items: center;
@@ -1112,6 +1153,158 @@
     .view-counter i {
       font-size: 16px;
       animation: blink 2s infinite;
+    }
+
+    .notification-popup {
+      display: none;
+      position: fixed;
+      z-index: 100001;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .notification-popup.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .notification-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      animation: slideDown 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .notification-content {
+      background: #1e1e1e;
+      color: #e0e0e0;
+    }
+
+    .notification-content h2 {
+      margin-bottom: 15px;
+      color: orange;
+      font-size: 1.8rem;
+    }
+
+    body.dark-mode .notification-content h2 {
+      color: orange;
+    }
+
+    .notification-content p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    body.dark-mode .notification-content p {
+      color: #b0b0b0;
+    }
+
+    .notification-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #999;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .notification-close:hover {
+      color: #ff0000;
+      transform: rotate(90deg);
+    }
+
+    .notification-btn {
+      background: orange;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    .notification-btn:hover {
+      background: #ff8c00;
+      transform: scale(1.05);
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .notification-body p {
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .notification-body strong {
+      font-weight: 700;
+      color: #333;
+    }
+
+    .notification-body em {
+      font-style: italic;
+    }
+
+    .notification-body a {
+      color: orange;
+      text-decoration: underline;
+    }
+
+    .notification-body ul,
+    .notification-body ol {
+      margin: 10px 0 10px 20px;
+    }
+
+    .notification-body li {
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .notification-body h1,
+    .notification-body h2,
+    .notification-body h3 {
+      margin: 10px 0 8px;
+      color: #333;
+    }
+
+    body.dark-mode .notification-body p,
+    body.dark-mode .notification-body li {
+      color: #b0b0b0;
+    }
+
+    body.dark-mode .notification-body strong,
+    body.dark-mode .notification-body h1,
+    body.dark-mode .notification-body h2,
+    body.dark-mode .notification-body h3 {
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .notification-body a {
+      color: orange;
     }
 
     @keyframes blink {
@@ -1233,7 +1426,18 @@
         border-width: 5px;
       }
 
+      .notification-content {
+        padding: 25px 20px;
+        max-width: 90%;
+      }
 
+      .notification-content h2 {
+        font-size: 1.5rem;
+      }
+
+      .notification-content p {
+        font-size: 0.95rem;
+      }
 
       .badge-icon {
         width: 27px;
@@ -1256,6 +1460,13 @@
       .dark-mode-toggle {
         bottom: 80px;
 
+        right: 20px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .show-notification-btn {
+        bottom: 135px;
         right: 20px;
         width: 45px;
         height: 45px;
@@ -1320,6 +1531,29 @@
     <div class="loader"></div>
     <div class="loading-text">Loading...</div>
   </div>
+  <div id="notification-popup" class="notification-popup">
+    <div class="notification-content">
+      <span class="notification-close">&times;</span>
+      <h2>🎉 Thông báo</h2>
+      <p>Chào mừng bạn đến với trang web của tôi!</p>
+      <p>Đây là nội dung thông báo mới nhất.</p>
+      <button class="notification-btn">Đã hiểu</button>
+    </div>
+  </div>
+  <div id="notification-popup" class="notification-popup">
+    <div class="notification-content">
+      <span class="notification-close">&times;</span>
+      <h2>Notification</h2>
+      <p>My website </p>
+      <p>Đây là nội dung thông báo mới nhất.</p>
+      <button class="notification-btn">Đã hiểu</button>
+    </div>
+  </div>
+
+  <button class="show-notification-btn" id="showNotificationBtn" title="Xem thông báo">
+    <i class="fas fa-bell"></i>
+  </button>
+
   <button class="dark-mode-toggle" id="darkModeToggle" title="Dark/Light Mode">
     <i class="fas fa-moon"></i>
   </button>
@@ -1510,13 +1744,13 @@
         else disableDarkMode();
       }
     });
-
-
-
+    document.getElementById('showNotificationBtn').addEventListener('click', () => {
+      const popup = document.getElementById('notification-popup');
+      popup.classList.add('active');
+      document.getElementById('showNotificationBtn').blur();
+    });
 
     let mybutton = document.getElementById("backToTop");
-
-
     window.onscroll = function () {
       scrollFunction();
     };
@@ -1650,7 +1884,6 @@
           elapsedTimeInterval = null;
         }
 
-        // Lọc activity (loại bỏ custom status type 4)
         const mainActivity = lData.activities.find(a => a.type !== 4);
 
 
@@ -1682,25 +1915,15 @@
           }
 
 
-          // Hiển thị activity card
           activityCard.classList.add('active');
 
-          // Tên activity
           if (hasIcon) {
             activityName.innerText = mainActivity.name || 'Unknown';
           } else {
             activityName.innerText = `Playing ${mainActivity.name || 'Unknown'}`;
           }
-
-
-          // State (dòng đầu tiên)
           activityState.innerText = mainActivity.state || '';
-
-          // Details (dòng thứ hai)
           activityDetails.innerText = mainActivity.details || '';
-
-
-          // Timestamp (elapsed time)
           if (mainActivity.timestamps && mainActivity.timestamps.start) {
             const startTime = mainActivity.timestamps.start;
             const updateElapsedTime = () => {
@@ -1717,7 +1940,7 @@
             };
 
             updateElapsedTime();
-            // Cập nhật mỗi giây
+
 
             elapsedTimeInterval = setInterval(updateElapsedTime, 1000)
           } else {
@@ -1726,7 +1949,7 @@
 
 
         } else {
-          // Không có activity → ẩn card
+
           if (elapsedTimeInterval) {
             clearInterval(elapsedTimeInterval);
             elapsedTimeInterval = null;
@@ -1986,7 +2209,69 @@
       }, 500);
     });
   </script>
+  <script>
+    async function initNotification() {
+      try {
+        const res = await fetch('/notification.json');
+        const data = await res.json();
 
+        if (!data.enabled) return;
+
+        const contentHTML = marked.parse(data.content || '');
+
+        const popupHTML = `
+      <div id="notification-popup" class="notification-popup">
+        <div class="notification-content">
+          <span class="notification-close">&times;</span>
+          <h2>${data.title}</h2>
+          <div class="notification-body">${contentHTML}</div>
+          <button class="notification-btn">${data.button_text}</button>
+        </div>
+      </div>
+    `;
+
+        document.body.insertAdjacentHTML('afterbegin', popupHTML);
+
+        const popup = document.getElementById('notification-popup');
+        const closeBtn = document.querySelector('.notification-close');
+        const okBtn = document.querySelector('.notification-btn');
+
+        const hasSeenPopup = sessionStorage.getItem('hasSeenNotification');
+
+        if (!hasSeenPopup) {
+          setTimeout(() => {
+            popup.classList.add('active');
+          }, 800);
+        }
+
+        function closeNotification() {
+          popup.classList.remove('active');
+          sessionStorage.setItem('hasSeenNotification', 'true');
+        }
+
+        closeBtn.addEventListener('click', closeNotification);
+        okBtn.addEventListener('click', closeNotification);
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) closeNotification();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && popup.classList.contains('active')) {
+            closeNotification();
+          }
+        });
+
+        document.getElementById('showNotificationBtn')?.addEventListener('click', () => {
+          popup.classList.add('active');
+          document.getElementById('showNotificationBtn').blur();
+        });
+
+      } catch (e) {
+        console.error('Không tải được thông báo:', e);
+      }
+    }
+
+    window.addEventListener('load', initNotification);
+  </script>
 </body>
 
 </html>

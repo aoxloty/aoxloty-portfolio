@@ -33,3 +33,30 @@ collections:
               - {label: "Tiêu đề", name: "title", widget: "string"}
               - {label: "Link Embed Youtube", name: "embedUrl", widget: "string"}
               - {label: "Mô tả", name: "description", widget: "string"}
+  - name: "notification"
+    label: "Thông báo Pop-up"
+    files:
+      - name: "notification"
+        label: "Cài đặt thông báo"
+        file: "notification.json"
+        fields:
+          - label: "Hiện thông báo"
+            name: "enabled"
+            widget: "boolean"
+            default: true
+            hint: "Bật/tắt hiển thị pop-up"
+
+          - label: "Tiêu đề"
+            name: "title"
+            widget: "string"
+            hint: "Tiêu đề của pop-up (có thể dùng emoji)"
+
+          - label: "Nội dung"
+            name: "content"
+            widget: "markdown"
+            hint: "Nội dung thông báo, hỗ trợ định dạng văn bản"
+
+          - label: "Chữ trên nút"
+            name: "button_text"
+            widget: "string"
+            default: "Đã hiểu"
