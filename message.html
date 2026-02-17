@@ -473,7 +473,7 @@
       transform: translateY(-4px);
     }
 
-    
+
 
     .footer {
       margin-top: 1.5rem;
@@ -499,30 +499,29 @@
         height: 44px;
       }
     }
-    
   </style>
 </head>
 
 <body>
 
-  
+
   <div id="loading-screen">
     <div class="loader"></div>
     <div class="loading-text">Loading...</div>
   </div>
 
-  
+
   <button class="dark-toggle" id="darkToggle" title="Chuyển sáng/tối">
     <i class="fas fa-moon"></i>
   </button>
 
-  
+
   <div class="card">
     <a href="/" class="back-btn">
       <i class="fas fa-arrow-left"></i> Back
     </a>
 
-    
+
     <div id="form-section">
       <div class="header">
         <div class="icon-wrap">💬</div>
@@ -574,10 +573,9 @@
   </div>
 
   <script>
-
-    const WEBHOOK_URL = 'https://discord.com/api/webhooks/1473369409572700344/0ei58zXlYp_DEH56L0ecJMIt8SVYRdQwsHwuEhELc8C_J5D9VyNxFLS2lC4_sWiSCUcT';
     const COOLDOWN_MS = 30000;
 
+  
     const darkToggle = document.getElementById('darkToggle');
     const body = document.body;
 
@@ -602,6 +600,7 @@
       darkToggle.blur();
     });
 
+  
     const textarea = document.getElementById('msg-input');
     const counter = document.getElementById('char-counter');
 
@@ -611,6 +610,7 @@
       counter.className = 'char-counter' + (len >= 500 ? ' over' : len >= 400 ? ' warn' : '');
     });
 
+    
     function hideAlerts() {
       ['alert-success', 'alert-error', 'alert-warn'].forEach(id => {
         document.getElementById(id).classList.remove('show');
@@ -626,6 +626,7 @@
       if (duration) setTimeout(() => el.classList.remove('show'), duration);
     }
 
+   
     function startCooldownCountdown(remainMs) {
       const secsEl = document.getElementById('cooldown-secs');
       showAlert('alert-warn', 0);
@@ -642,6 +643,7 @@
       }, 1000);
     }
 
+    // Send
     const sendBtn = document.getElementById('send-btn');
     const formSection = document.getElementById('form-section');
     const successSection = document.getElementById('success-section');
@@ -653,6 +655,8 @@
         textarea.focus();
         return;
       }
+
+      
       const lastSent = localStorage.getItem('lastMsgSent');
       if (lastSent) {
         const diff = Date.now() - parseInt(lastSent);
@@ -662,41 +666,35 @@
         }
       }
 
+  
       sendBtn.disabled = true;
       sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
       try {
-        const res = await fetch(WEBHOOK_URL, {
+        const res = await fetch('/.netlify/functions/send-message', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            embeds: [{
-              title: '📩 Message',
-              description: msg,
-              color: 0xFFA500,
-              footer: {
-                text: `Sent at ${new Date().toLocaleString('vi-VN')}`
-              }
-            }]
-          })
+          body: JSON.stringify({ message: msg })
         });
 
-        if (res.ok) {
-          localStorage.setItem('lastMsgSent', Date.now());
+        const data = await res.json();
 
+        if (res.ok && data.success) {
+          localStorage.setItem('lastMsgSent', Date.now());
+         
           formSection.style.display = 'none';
           successSection.classList.add('show');
         } else {
           showAlert('alert-error');
         }
-      } catch {
+      } catch (err) {
+        console.error('Error:', err);
         showAlert('alert-error');
       } finally {
         sendBtn.disabled = false;
-        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send the message';
+        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Gửi tin nhắn';
       }
     });
-
 
     sendAgainBtn.addEventListener('click', () => {
       textarea.value = '';
@@ -705,45 +703,12 @@
       successSection.classList.remove('show');
     });
 
-    textarea.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-        sendBtn.click();
-      }
-    });
-
     window.addEventListener('load', () => {
       const ls = document.getElementById('loading-screen');
       setTimeout(() => {
         ls.classList.add('hidden');
         setTimeout(() => ls.remove(), 500);
       }, 400);
-    });
-
-    document.addEventListener('contextmenu', (e) => {
-      if (e.target.tagName === 'TEXTAREA') {
-        return true;
-      }
-      e.preventDefault();
-      return false;
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (document.activeElement.tagName === 'TEXTAREA') {
-        return true;
-      }
-
-      if (e.ctrlKey || e.metaKey) {
-        if (e.key === 'c' || e.key === 'a' || e.key === 'x') {
-          e.preventDefault();
-          return false;
-        }
-      }
-    });
-
-    document.addEventListener('dragstart', (e) => {
-      if (e.target.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-      }
     });
   </script>
 </body>
