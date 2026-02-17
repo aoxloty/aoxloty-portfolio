@@ -1,6 +1,6 @@
 {
-    "enabled": true,
-    "title": "🎉 Thông báo",
-    "content": "Chào mừng bạn đến với trang web của tôi!",
-    "button_text": "Đã hiểu"
+  "enabled": true,
+  "title": "Notification!",
+  "content": "Website may load slowly due to internet connection.\n\n***I'm still not doing any commission!***",
+  "button_text": "Done"
 }
