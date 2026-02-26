@@ -1,6 +1,6 @@
 {
   "enabled": true,
   "title": "Notification!",
-  "content": "Website may load slowly due to internet connection.\n\n***IT'S MY BIRTHDAY!!! (24 February)***",
-  "button_text": "Happy Birthday!"
+  "content": "Website may load slowly due to internet connection.\n\nTesting **My Shop** on my *[Buymeacoffee](https://aoxloty.netlify.app/en/)*! You can try!",
+  "button_text": "I see"
 }
