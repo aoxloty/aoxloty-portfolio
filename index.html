@@ -1362,6 +1362,24 @@
         margin: 15px auto;
       }
 
+      #bluesky-latest {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+      }
+
+      #bluesky-latest iframe {
+        max-width: 100% !important;
+        width: 100% !important;
+        min-width: unset !important;
+      }
+
+      .bluesky-embed {
+        max-width: 100% !important;
+        width: 100% !important;
+        min-width: unset !important;
+      }
+
 
       .custom-icon-wrapper {
         width: 50px;
@@ -1401,12 +1419,28 @@
 
       .video-wrapper,
       h1,
-      h2,
       h3,
       .art-gallery {
         width: 100%;
 
+      }
 
+      h2 {
+        width: 100%;
+       
+      }
+
+      #bluesky-latest {
+        width: 100%;
+        overflow: hidden;
+        transform-origin: top left;
+      }
+
+      #bluesky-latest iframe {
+        transform-origin: top left;
+        transform: scale(0.85);
+        width: 118% !important;
+        max-width: 118% !important;
       }
 
       .avatar-container {
@@ -1608,8 +1642,15 @@
     </div>
     <h3 id="latest-video-title"></h3>
     <a href="/video/all-video.html" class="btn-others">Show more</a>
+    <br>
 
     <h2><b>Social Media</b></h2>
+
+    <h2 style="display:flex; align-items:center; justify-content:center; gap:8px;">
+      <img src="social-svg/discord.png" style="width:28px;height:28px;">
+      <b style="color:#5865f2;">Discord</b>
+    </h2>
+
     <div class="discord-card">
       <div class="discord-banner" id="banner"></div>
       <div class="avatar-container">
@@ -1637,6 +1678,14 @@
       </a>
     </div>
 
+
+    <h2 style="display:flex; align-items:center; justify-content:center; gap:8px;">
+      <img src="social-svg/bluesky.png" style="width:28px;height:28px;">
+      <b style="color:#0085ff;">Bluesky</b>
+    </h2>
+    <div id="bluesky-latest"
+      style="display:flex; justify-content:center; width:100%; max-width:100%; margin:0 auto; overflow:hidden;"></div>
+    <h2><b>Other Media</b></h2>
     <div class="social-links">
       <a href="https://www.youtube.com/@aoxloty" class="custom-icon-wrapper" title="Youtube" target="_blank">
         <img src="social-svg/youtube-gray.png" class="icon-normal" alt="Youtube">
@@ -2283,6 +2332,51 @@
     }
 
     window.addEventListener('load', initNotification);
+  </script>
+  <script>
+    async function loadLatestBlueskyPost() {
+      const handle = 'aoxloty.bsky.social';
+      const container = document.getElementById('bluesky-latest');
+
+      try {
+        const resolveRes = await fetch(`https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle?handle=${handle}`);
+        const { did } = await resolveRes.json();
+
+        const feedRes = await fetch(`https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${did}&limit=1&filter=posts_no_replies`);
+        const feedData = await feedRes.json();
+
+        const post = feedData.feed[0].post;
+        const uriParts = post.uri.split('/');
+        const rkey = uriParts[uriParts.length - 1];
+
+        const atUri = `at://${did}/app.bsky.feed.post/${rkey}`;
+
+
+        container.innerHTML = `
+      <blockquote class="bluesky-embed" data-bluesky-uri="${atUri}" data-bluesky-cid="${post.cid}" data-bluesky-embed-color-mode="system">
+        <p>${post.record.text}</p>
+      </blockquote>
+    `;
+
+        // Load script embed của Bluesky (chỉ load 1 lần)
+        if (!document.getElementById('bluesky-embed-script')) {
+          const script = document.createElement('script');
+          script.id = 'bluesky-embed-script';
+          script.src = 'https://embed.bsky.app/static/embed.js';
+          script.charset = 'UTF-8';
+          script.async = true;
+          document.body.appendChild(script);
+        } else {
+
+          if (window.__bsky_embed) window.__bsky_embed();
+        }
+
+      } catch (e) {
+        console.error('Bluesky error:', e);
+      }
+    }
+
+    window.addEventListener('load', loadLatestBlueskyPost);
   </script>
 </body>
 
