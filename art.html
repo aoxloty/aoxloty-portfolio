@@ -286,7 +286,7 @@
 </head>
 
 <body>
-    <!-- Nút Dark Mode Toggle -->
+    
     <button class="dark-mode-toggle" id="darkModeToggle" title="Dark/Light Mode">
         <i class="fas fa-moon"></i>
     </button>
@@ -298,7 +298,7 @@
 
         <img id="art-image" src="" alt="Art Image">
 
-        <h1 id="art-title">Đang tải...</h1>
+        <h1 id="art-title">Loading...</h1>
         <p id="art-date" style="color: #888; font-size: 0.9rem; margin: 5px 0;"></p>
         <p id="art-desc" style="margin-bottom: 1.5rem;"></p>
 
@@ -431,11 +431,11 @@
                         nextBtn.disabled = currentArtIndex === allArtData.length - 1;
                     }
                 } else {
-                    if (titleH1) titleH1.innerText = "Không tìm thấy tác phẩm";
+                    if (titleH1) titleH1.innerText = "Artwork can not be found";
                 }
             } catch (error) {
                 console.error(error);
-                if (titleH1) titleH1.innerText = "Lỗi nạp dữ liệu";
+                if (titleH1) titleH1.innerText = "Error loading data";
             }
         }
 

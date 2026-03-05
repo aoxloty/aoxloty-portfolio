@@ -1602,7 +1602,7 @@
     </div>
   </div>
 
-  <button class="show-notification-btn" id="showNotificationBtn" title="Xem thông báo">
+  <button class="show-notification-btn" id="showNotificationBtn" title="Check Notifications">
     <i class="fas fa-bell"></i>
   </button>
 
@@ -1653,6 +1653,16 @@
 
     <h2><b>Social Media</b></h2>
 
+
+
+
+    <h2 style="display:flex; align-items:center; justify-content:center; gap:8px;">
+      <img src="social-svg/bluesky.png" style="width:28px;height:28px;">
+      <b style="color:#0085ff;">Bluesky</b>
+    </h2>
+    <div id="bluesky-latest"
+      style="display:flex; justify-content:center; width:100%; max-width:100%; margin:0 auto; overflow:hidden;"></div>
+
     <h2 style="display:flex; align-items:center; justify-content:center; gap:8px;">
       <img src="social-svg/discord.png" style="width:28px;height:28px;">
       <b style="color:#5865f2;">Discord</b>
@@ -1684,32 +1694,24 @@
         <i class="fas fa-external-link-alt" style="font-size: 15px;"></i>
       </a>
     </div>
-
-
-    <h2 style="display:flex; align-items:center; justify-content:center; gap:8px;">
-      <img src="social-svg/bluesky.png" style="width:28px;height:28px;">
-      <b style="color:#0085ff;">Bluesky</b>
-    </h2>
-    <div id="bluesky-latest"
-      style="display:flex; justify-content:center; width:100%; max-width:100%; margin:0 auto; overflow:hidden;"></div>
     <h2><b>Other Media</b></h2>
     <div class="social-links">
       <a href="https://www.youtube.com/@aoxloty" class="custom-icon-wrapper" title="Youtube" target="_blank">
         <img src="social-svg/youtube-gray.png" class="icon-normal" alt="Youtube">
         <img src="social-svg/youtube.png" class="icon-hover" alt="Youtube">
       </a>
-
-      <a href="https://bsky.app/profile/aoxloty.bsky.social" class="custom-icon-wrapper" title="Bluesky"
+      <!--
+      <a href="https://bsky.app/" class="custom-icon-wrapper" title="Bluesky"
         target="_blank">
         <img src="social-svg/bluesky-gray.png" class="icon-normal" alt="Bluesky">
         <img src="social-svg/bluesky.png" class="icon-hover" alt="Bluesky">
       </a>
 
-      <a href="https://discord.gg/aFyydgZGyt" class="custom-icon-wrapper" title="Discord" target="_blank">
+      <a href="https://discord.gg/" class="custom-icon-wrapper" title="Discord" target="_blank">
         <img src="social-svg/discord-gray.png" class="icon-normal" alt="Discord">
         <img src="social-svg/discord.png" class="icon-hover" alt="Discord">
       </a>
-
+      -->
       <a href="https://www.roblox.com/users/3589247121/profile" class="custom-icon-wrapper" title="Roblox"
         target="_blank">
         <img src="social-svg/roblox-gray.png" class="icon-normal" alt="Roblox">
@@ -2029,7 +2031,7 @@
 
 
       } catch (e) {
-        console.error("Lỗi khi tải dữ liệu Discord:", e);
+        console.error("Error loading Discord data:", e);
       }
     }
 
@@ -2167,7 +2169,7 @@
         }
 
       } catch (error) {
-        console.error("Lỗi tải nội dung:", error);
+        console.error("Error loading content:", error);
       }
     }
 
@@ -2334,7 +2336,7 @@
         });
 
       } catch (e) {
-        console.error('Không tải được thông báo:', e);
+        console.error('Can not load notification:', e);
       }
     }
 
@@ -2365,7 +2367,7 @@
       </blockquote>
     `;
 
-        // Load script embed của Bluesky (chỉ load 1 lần)
+
         if (!document.getElementById('bluesky-embed-script')) {
           const script = document.createElement('script');
           script.id = 'bluesky-embed-script';

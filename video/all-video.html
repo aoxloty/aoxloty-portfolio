@@ -347,7 +347,7 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <button id="backToTop" title="Lên đầu trang">
+    <button id="backToTop" title="Go to top">
         <i class="fas fa-chevron-up"></i>
     </button>
 
@@ -505,7 +505,7 @@
                     if (loadingScreen) loadingScreen.classList.add('hidden');
                 }
             } catch (error) {
-                console.error("Lỗi nạp video:", error);
+                console.error("Error loading videos:", error);
                 container.innerHTML = "<p>Error loading videos.</p>";
                 if (loadingScreen) loadingScreen.classList.add('hidden');
             }
