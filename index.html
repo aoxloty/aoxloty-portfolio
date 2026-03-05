@@ -754,6 +754,7 @@
       justify-content: center;
       flex-wrap: wrap;
       overflow: visible;
+
     }
 
 
@@ -1363,12 +1364,16 @@
       }
 
       #bluesky-latest {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow: hidden !important;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+        overflow: hidden;
+        box-sizing: border-box;
       }
 
-      #bluesky-latest iframe {
+      #bluesky-latest iframe,
+      #bluesky-latest blockquote {
         max-width: 100% !important;
         width: 100% !important;
         min-width: unset !important;
@@ -1380,6 +1385,10 @@
         min-width: unset !important;
       }
 
+      #badges {
+        justify-content: center;
+
+      }
 
       .custom-icon-wrapper {
         width: 50px;
@@ -1434,21 +1443,6 @@
 
       }
 
-      #bluesky-latest {
-        width: 100%;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        margin-top: 0 !important;
-        margin-bottom: 8px !important;
-      }
-
-      #bluesky-latest iframe {
-        transform-origin: top center;
-        transform: scale(0.85);
-        width: 118% !important;
-        max-width: 118% !important;
-      }
 
       .avatar-container {
         width: 100px;
@@ -1575,6 +1569,27 @@
       
       } */
     }
+
+    @media (max-width: 400px) {
+
+      #badges {
+        justify-content: center;
+        max-width: 181.9px;
+
+      }
+
+
+      #bluesky-latest {
+        display: none !important;
+      }
+
+    }
+
+    @media (min-width: 401px) {
+      .btn-hide-mobile {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -1612,8 +1627,8 @@
   <div class="container">
     <a class="button-lang" title="Support me" href="/language"></a>
 
-    <div style="height: 1rem;"></div>
-    <h1><b>Aoxloty's Portfolio</b></h1>
+    <div style="height: 1rem" ;></div>
+    <h1 style="user-select: none;"><b>Aoxloty's Portfolio</b></h1>
     <button id="backToTop" title="Back to Top">
       <i class="fas fa-chevron-up"></i> </button>
     <div class="profile-header">
@@ -1622,7 +1637,7 @@
         <img src="Untitled-1.png" alt="Aoxloty" />
       </a>
 
-      <div class="profile-info">
+      <div class="profile-info" style="user-select: none;">
 
         <p style="margin-bottom: 0.5rem;"></p>
         <p style="margin-bottom: 0;">Hello, I'm Aoxloty! An artist and animator.</p>
@@ -1637,12 +1652,12 @@
 
 
 
-    <h2><b>Latest Drawings</b></h2>
+    <h2 style="user-select: none;"><b>Latest Drawings</b></h2>
     <div class="art-gallery" id="main-gallery"></div>
 
     <a href="/draws/all-art.html" class="btn-others">Show more</a>
 
-    <h2><b>Latest Work</b></h2>
+    <h2 style="user-select: none;"><b>Latest Work</b></h2>
 
     <div class="video-wrapper">
       <iframe id="latest-video-frame" src="" frameborder="0" allowfullscreen></iframe>
@@ -1651,19 +1666,23 @@
     <a href="/video/all-video.html" class="btn-others">Show more</a>
     <br>
 
-    <h2><b>Social Media</b></h2>
+    <h2 style="user-select: none;"><b>Social Media</b></h2>
 
 
 
 
-    <h2 style="display:flex; align-items:center; justify-content:center; gap:8px;">
+    <h2 id="bluesky-heading"
+      style="display:flex; align-items:center; justify-content:center; gap:8px; user-select: none;">
       <img src="social-svg/bluesky.png" style="width:28px;height:28px;">
       <b style="color:#0085ff;">Bluesky</b>
     </h2>
+    <a href="https://bsky.app/profile/aoxloty.bsky.social" class="btn-support btn-hide-mobile"
+      style="margin-top: 20px;margin-bottom: 20px;" target="_blank" ><i class="fas fa-external-link-alt"></i> See on
+      Bluesky</a>
     <div id="bluesky-latest"
       style="display:flex; justify-content:center; width:100%; max-width:100%; margin:0 auto; overflow:hidden;"></div>
 
-    <h2 style="display:flex; align-items:center; justify-content:center; gap:8px;">
+    <h2 style="display:flex; align-items:center; justify-content:center; gap:8px; user-select: none;">
       <img src="social-svg/discord.png" style="width:28px;height:28px;">
       <b style="color:#5865f2;">Discord</b>
     </h2>
@@ -1694,7 +1713,7 @@
         <i class="fas fa-external-link-alt" style="font-size: 15px;"></i>
       </a>
     </div>
-    <h2><b>Other Media</b></h2>
+    <h2 style="user-select: none;"><b>Other Media</b></h2>
     <div class="social-links">
       <a href="https://www.youtube.com/@aoxloty" class="custom-icon-wrapper" title="Youtube" target="_blank">
         <img src="social-svg/youtube-gray.png" class="icon-normal" alt="Youtube">
@@ -1740,7 +1759,7 @@
 
     <a href="/language/index.html" class="btn-support" style="margin-top: 20px;">Support My Work 💛</a>
 
-    <div class="footer">
+    <div class="footer" style="user-select: none;">
       ©2026 Aoxloty.<br />
       Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank"
         class="text-cre"><u>congtuuit</u></a>.
