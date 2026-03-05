@@ -1415,6 +1415,8 @@
         position: relative;
         box-sizing: border-box;
         overflow: visible;
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
       }
 
       .video-wrapper,
@@ -1427,17 +1429,22 @@
 
       h2 {
         width: 100%;
-       
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
+
       }
 
       #bluesky-latest {
         width: 100%;
         overflow: hidden;
-        transform-origin: top left;
+        display: flex;
+        justify-content: center;
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
       }
 
       #bluesky-latest iframe {
-        transform-origin: top left;
+        transform-origin: top center;
         transform: scale(0.85);
         width: 118% !important;
         max-width: 118% !important;
