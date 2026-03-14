@@ -1677,7 +1677,7 @@
       <b style="color:#0085ff;">Bluesky</b>
     </h2>
     <a href="https://bsky.app/profile/aoxloty.bsky.social" class="btn-support btn-hide-mobile"
-      style="margin-top: 20px;margin-bottom: 20px;" target="_blank" ><i class="fas fa-external-link-alt"></i> See on
+      style="margin-top: 20px;margin-bottom: 20px;" target="_blank"><i class="fas fa-external-link-alt"></i> View on
       Bluesky</a>
     <div id="bluesky-latest"
       style="display:flex; justify-content:center; width:100%; max-width:100%; margin:0 auto; overflow:hidden;"></div>
@@ -1757,7 +1757,7 @@
       <i class="fas fa-paper-plane"></i> Send me a message!
     </a>
 
-    <a href="/language/index.html" class="btn-support" style="margin-top: 20px;">Support My Work 💛</a>
+    <a href="/language/index.html" class="btn-support" style="margin-top: 20px;">💛 Support My Work</a>
 
     <div class="footer" style="user-select: none;">
       ©2026 Aoxloty.<br />
@@ -1874,7 +1874,8 @@
         const user = data.user;
 
         const avatarImg = document.getElementById('avatar');
-        avatarImg.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=160`;
+        const avatarExt = user.avatar.startsWith('a_') ? 'gif' : 'webp';
+        avatarImg.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${avatarExt}?size=160`;
 
         const deco = document.getElementById('decoration');
         const decoData = (data.discord_user && data.discord_user.avatar_decoration_data)
