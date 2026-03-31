@@ -538,10 +538,15 @@
       </div>
 
 
-      <button class="send-btn" id="send-btn">
+      <button class="send-btn" id="send-btn" disabled>
         <i class="fas fa-paper-plane"></i>
         Send
       </button>
+
+      <div class="alert alert-warn show" id="alert-closed" style="margin-top: 0.8rem;">
+        <i class="fas fa-lock"></i>
+        The message box is closed for now.
+      </div>
 
       <div class="alert alert-success" id="alert-success">
         <i class="fas fa-check-circle"></i>
@@ -653,22 +658,6 @@
 
     // Send
     const sendBtn = document.getElementById('send-btn');
-
-    async function checkSendEnabled() {
-      try {
-        const res = await fetch('/notification.json?t=' + Date.now());
-        const data = await res.json();
-        if (data.send_enabled === false) {
-          sendBtn.disabled = true;
-          const warn = document.getElementById('alert-warn');
-          warn.innerHTML = '<i class="fas fa-lock"></i> Tính năng gửi tin nhắn hiện đang tạm thời đóng!';
-          warn.classList.add('show');
-        }
-      } catch (e) { }
-    }
-    checkSendEnabled();
-
-
     const formSection = document.getElementById('form-section');
     const successSection = document.getElementById('success-section');
     const sendAgainBtn = document.getElementById('send-again-btn');
