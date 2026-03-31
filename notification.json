@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "title": "Notification!",
-  "content": "Website may load slowly due to internet connection.\n\nTesting Discord and Bluesky embed.",
-  "button_text": "I see"
+  "title": "Notification",
+  "content": "![aox waving sadly](assets/art/aox.png)\n\nThe website may load slowly due to the internet connection.\n\nGonna take a break for two months. (March 30, 2026 - June 13, 2026)",
+  "button_text": "Done"
 }
