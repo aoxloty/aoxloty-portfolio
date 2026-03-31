@@ -60,3 +60,9 @@ collections:
             name: "button_text"
             widget: "string"
             default: "Đã hiểu"
+
+          - label: "Cho phép gửi tin nhắn"
+            name: "send_enabled"
+            widget: "boolean"
+            default: true
+            hint: "Bật/tắt nút Send trên trang nhắn tin"
