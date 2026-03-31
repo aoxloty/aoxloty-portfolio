@@ -2,5 +2,6 @@
   "enabled": true,
   "title": "Notification",
   "content": "![aox waving sadly](assets/art/aox.png)\n\nThe website may load slowly due to the internet connection.\n\nGonna take a break for two months. (March 30, 2026 - June 13, 2026)",
-  "button_text": "Done"
+  "button_text": "Done",
+  "send_enabled": true
 }
