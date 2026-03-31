@@ -537,7 +537,8 @@
         </div>
       </div>
 
-      <button class="send-btn" id="send-btn">
+
+      <button class="send-btn" id="send-btn" disabled>
         <i class="fas fa-paper-plane"></i>
         Send
       </button>
@@ -546,6 +547,13 @@
         <i class="fas fa-check-circle"></i>
         Done! Thanks for your message!
       </div>
+
+      <div class="alert alert-warn show" id="alert-closed" style="margin-top: 0.8rem;">
+        <i class="fas fa-lock"></i>
+        Send messages are closed temporarily!
+      </div>
+
+
       <div class="alert alert-error" id="alert-error">
         <i class="fas fa-times-circle"></i>
         Failed to send, please try again later!
@@ -575,7 +583,7 @@
   <script>
     const COOLDOWN_MS = 30000;
 
-  
+
     const darkToggle = document.getElementById('darkToggle');
     const body = document.body;
 
@@ -600,7 +608,7 @@
       darkToggle.blur();
     });
 
-  
+
     const textarea = document.getElementById('msg-input');
     const counter = document.getElementById('char-counter');
 
@@ -610,7 +618,7 @@
       counter.className = 'char-counter' + (len >= 500 ? ' over' : len >= 400 ? ' warn' : '');
     });
 
-    
+
     function hideAlerts() {
       ['alert-success', 'alert-error', 'alert-warn'].forEach(id => {
         document.getElementById(id).classList.remove('show');
@@ -626,7 +634,7 @@
       if (duration) setTimeout(() => el.classList.remove('show'), duration);
     }
 
-   
+
     function startCooldownCountdown(remainMs) {
       const secsEl = document.getElementById('cooldown-secs');
       showAlert('alert-warn', 0);
@@ -656,7 +664,7 @@
         return;
       }
 
-      
+
       const lastSent = localStorage.getItem('lastMsgSent');
       if (lastSent) {
         const diff = Date.now() - parseInt(lastSent);
@@ -666,7 +674,7 @@
         }
       }
 
-  
+
       sendBtn.disabled = true;
       sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
@@ -681,7 +689,7 @@
 
         if (res.ok && data.success) {
           localStorage.setItem('lastMsgSent', Date.now());
-         
+
           formSection.style.display = 'none';
           successSection.classList.add('show');
         } else {
