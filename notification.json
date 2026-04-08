@@ -1,6 +1,7 @@
 {
-    "enabled": true,
-    "title": "🎉 Thông báo",
-    "content": "Chào mừng bạn đến với trang web của tôi!",
-    "button_text": "Đã hiểu"
+  "enabled": true,
+  "title": "Notification",
+  "content": "Welcome!",
+  "button_text": "Đã hiểu",
+  "send_enabled": true
 }
