@@ -1,7 +1,6 @@
 {
-  "enabled": true,
-  "title": "...",
-  "content": "...",
-  "button_text": "Đã hiểu",
-  "send_enabled": true
+    "enabled": true,
+    "title": "🎉 Thông báo",
+    "content": "Chào mừng bạn đến với trang web của tôi!",
+    "button_text": "Đã hiểu"
 }

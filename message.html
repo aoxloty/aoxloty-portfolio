@@ -583,7 +583,11 @@
   </div>
 
   <script>
+
+
+
     const COOLDOWN_MS = 30000;
+
 
     const darkToggle = document.getElementById('darkToggle');
     const body = document.body;
@@ -609,19 +613,16 @@
       darkToggle.blur();
     });
 
+
     const textarea = document.getElementById('msg-input');
     const counter = document.getElementById('char-counter');
-    const sendBtn = document.getElementById('send-btn');
-    const formSection = document.getElementById('form-section');
-    const successSection = document.getElementById('success-section');
-    const sendAgainBtn = document.getElementById('send-again-btn');
-    const alertClosed = document.getElementById('alert-closed');
 
     textarea.addEventListener('input', () => {
       const len = textarea.value.length;
       counter.textContent = `${len} / 500`;
       counter.className = 'char-counter' + (len >= 500 ? ' over' : len >= 400 ? ' warn' : '');
     });
+
 
     function hideAlerts() {
       ['alert-success', 'alert-error', 'alert-warn'].forEach(id => {
@@ -637,6 +638,7 @@
       el.classList.add('show');
       if (duration) setTimeout(() => el.classList.remove('show'), duration);
     }
+
 
     function startCooldownCountdown(remainMs) {
       const secsEl = document.getElementById('cooldown-secs');
@@ -654,27 +656,11 @@
       }, 1000);
     }
 
-    // Check send_enabled khi load trang
-    async function checkSendEnabled() {
-      try {
-        const res = await fetch('/notification.json');
-        const data = await res.json();
-
-        if (data.send_enabled === true) {
-          // Mở: enable nút, ẩn thông báo đóng
-          sendBtn.disabled = false;
-          alertClosed.classList.remove('show');
-        } else {
-          // Đóng: disable nút, hiện thông báo đóng
-          sendBtn.disabled = true;
-          alertClosed.classList.add('show');
-        }
-      } catch (e) {
-        // Nếu lỗi fetch thì giữ đóng cho an toàn
-        sendBtn.disabled = true;
-        alertClosed.classList.add('show');
-      }
-    }
+    // Send
+    const sendBtn = document.getElementById('send-btn');
+    const formSection = document.getElementById('form-section');
+    const successSection = document.getElementById('success-section');
+    const sendAgainBtn = document.getElementById('send-again-btn');
 
     sendBtn.addEventListener('click', async () => {
       const msg = textarea.value.trim();
@@ -682,6 +668,7 @@
         textarea.focus();
         return;
       }
+
 
       const lastSent = localStorage.getItem('lastMsgSent');
       if (lastSent) {
@@ -691,6 +678,7 @@
           return;
         }
       }
+
 
       sendBtn.disabled = true;
       sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
@@ -706,12 +694,9 @@
 
         if (res.ok && data.success) {
           localStorage.setItem('lastMsgSent', Date.now());
+
           formSection.style.display = 'none';
           successSection.classList.add('show');
-        } else if (res.status === 403) {
-          // Server cũng chặn, hiện thông báo đóng
-          sendBtn.disabled = true;
-          alertClosed.classList.add('show');
         } else {
           showAlert('alert-error');
         }
@@ -719,12 +704,8 @@
         console.error('Error:', err);
         showAlert('alert-error');
       } finally {
-        // Chỉ re-enable nếu box còn mở
-        const check = await fetch('/notification.json').then(r => r.json()).catch(() => ({ send_enabled: false }));
-        if (check.send_enabled) {
-          sendBtn.disabled = false;
-          sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
-        }
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
       }
     });
 
@@ -741,9 +722,6 @@
         ls.classList.add('hidden');
         setTimeout(() => ls.remove(), 500);
       }, 400);
-
-      // Check ngay khi load
-      checkSendEnabled();
     });
   </script>
 </body>
