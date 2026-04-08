@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "title": "Notification",
-  "content": "Welcome!",
-  "button_text": "Đã hiểu",
+  "content": "![](assets/art/aox.png)\n\nWelcome!",
+  "button_text": "Understand!",
   "send_enabled": true
 }
