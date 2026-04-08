@@ -1,13 +1,10 @@
 // Netlify Serverless Function
 // File: netlify/functions/send-message.js
 
+const fs = require('fs');
+const path = require('path');
+
 exports.handler = async (event, context) => {
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method Not Allowed' })
-    };
-  }
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -16,17 +13,39 @@ exports.handler = async (event, context) => {
   };
 
   if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers, body: '' };
+  }
+
+  if (event.httpMethod !== 'POST') {
     return {
-      statusCode: 200,
+      statusCode: 405,
       headers,
-      body: ''
+      body: JSON.stringify({ error: 'Method Not Allowed' })
+    };
+  }
+
+  let IS_OPEN = false;
+  try {
+    const settingsPath = path.join(process.cwd(), 'notification.json');
+    const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    IS_OPEN = settings.send_enabled === true;
+  } catch (e) {
+    console.error('Could not read notification.json:', e);
+    IS_OPEN = false;
+  }
+
+  if (!IS_OPEN) {
+    return {
+      statusCode: 403,
+      headers,
+      body: JSON.stringify({ success: false, error: 'Message box is closed' })
     };
   }
 
   try {
     const { message } = JSON.parse(event.body);
 
-  
+
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
       return {
         statusCode: 400,
@@ -65,7 +84,7 @@ exports.handler = async (event, context) => {
         embeds: [{
           title: '📩 Message',
           description: message.trim(),
-          color: 0xFFA500, 
+          color: 0xFFA500,
           footer: {
             text: `Sent at ${new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}`
           },
@@ -77,7 +96,7 @@ exports.handler = async (event, context) => {
     if (!discordResponse.ok) {
       const errorText = await discordResponse.text();
       console.error('Discord API error:', discordResponse.status, errorText);
-      
+
       if (discordResponse.status === 429) {
         return {
           statusCode: 429,
