@@ -1,7 +1,7 @@
 {
-    "enabled": true,
-    "title": "...",
-    "content": "...",
-    "button_text": "Đã hiểu",
-    "send_enabled": false
+  "enabled": true,
+  "title": "...",
+  "content": "...",
+  "button_text": "Đã hiểu",
+  "send_enabled": true
 }
