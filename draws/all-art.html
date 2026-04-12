@@ -358,6 +358,12 @@
     <div class="footer">
       ©2026 Aoxloty.
     </div>
+    <br>
+    <a class="copyrighted-badge" title="Copyrighted.com Registered &amp; Protected" target="_blank"
+      href="https://app.copyrighted.com/website/xiQvurReTfGMhQnW/"><img alt="Copyrighted.com Registered &amp; Protected"
+        border="0" width="125" height="25" srcset="https://static.copyrighted.com/badges/125x25/02_1_2x.png 2x"
+        src="https://static.copyrighted.com/badges/125x25/02_1.png"></a>
+    <script src="https://static.copyrighted.com/badges/helper.js"></script>
   </div>
 
   <script>
@@ -469,7 +475,7 @@
             img.alt = art.title;
 
             img.onload = () => {
-              img.classList.add('loaded'); 
+              img.classList.add('loaded');
               loadedImages++;
               if (loadedImages >= totalImages * 0.7 && loadingScreen) {
                 loadingScreen.classList.add('hidden');
@@ -477,7 +483,7 @@
             };
 
             img.onerror = () => {
-              img.classList.add('loaded'); 
+              img.classList.add('loaded');
               img.alt = 'Image failed to load';
               loadedImages++;
               if (loadedImages >= totalImages * 0.7 && loadingScreen) {
